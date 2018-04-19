@@ -10,11 +10,22 @@ import UIKit
 
 class CompaniesController: UITableViewController {
     
-    let companies = [
+    //let: constant
+    //var: variable that can be modifield
+    var companies = [
         Company(name: "Apple", founded: Date()),
         Company(name: "Google", founded: Date()),
         Company(name: "Amazon", founded: Date())
     ]
+    
+    func addCompany(company: Company) {
+        //1 - modify your array
+        companies.append(company)
+        
+        //2 - insert new index path into tableView
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -34,13 +45,13 @@ class CompaniesController: UITableViewController {
         
     }
     
-    @objc func handleAddCompany() {
+    @objc private func handleAddCompany() {
         print("Adding")
         
         let createCompanyController = CreateCompanyController()
-//        createCompanyController.view.backgroundColor = .green
-        
         let navController = UINavigationController(rootViewController: createCompanyController)
+        
+        createCompanyController.companiesController = self
         
         present(navController, animated: true, completion: nil)
     }

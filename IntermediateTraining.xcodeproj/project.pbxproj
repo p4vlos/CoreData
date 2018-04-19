@@ -62,13 +62,13 @@
 			children = (
 				3E5D845A1FED7B8F00F6DB68 /* AppDelegate.swift */,
 				3E5D845C1FED7B8F00F6DB68 /* CompaniesController.swift */,
+				3E3C61B32088CA430067AAA5 /* CreateCompanyController.swift */,
 				3E5D845E1FED7B8F00F6DB68 /* Main.storyboard */,
 				3E5D84611FED7B8F00F6DB68 /* Assets.xcassets */,
 				3E5D84631FED7B8F00F6DB68 /* LaunchScreen.storyboard */,
 				3E5D84661FED7B8F00F6DB68 /* Info.plist */,
 				3E0F1DCD2088B67A008B525E /* UIColor+theme.swift */,
 				3E3C61B12088C4270067AAA5 /* Compay.swift */,
-				3E3C61B32088CA430067AAA5 /* CreateCompanyController.swift */,
 			);
 			path = IntermediateTraining;
 			sourceTree = "<group>";
