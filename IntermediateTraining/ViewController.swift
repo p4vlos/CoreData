@@ -17,7 +17,7 @@ class ViewController: UITableViewController {
         
         navigationItem.title = "Companies"
         
-        tableView.backgroundColor = UIColor(red: 9/255, green: 45/255, blue: 64/255, alpha: 1)
+        tableView.backgroundColor = .darkBlue
 //        tableView.separatorStyle = .none
         
         tableView.tableFooterView = UIView() //blank UIView
@@ -37,8 +37,8 @@ class ViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
         
-        let tealColor = UIColor(red: 48/255, green: 164/255, blue: 164/255, alpha: 1)
-        cell.backgroundColor = tealColor
+        
+        cell.backgroundColor = .tealColor
         
         return cell
     }
@@ -50,8 +50,8 @@ class ViewController: UITableViewController {
     func setupNavigationStyle() {
         navigationController?.navigationBar.isTranslucent = false
         
-        let lightRed = UIColor(red: 247/255, green: 66/255, blue: 82/255, alpha: 1)
-        navigationController?.navigationBar.barTintColor = lightRed
+        
+        navigationController?.navigationBar.barTintColor = .lightRed
         navigationController?.navigationBar.prefersLargeTitles = true
         
         navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
