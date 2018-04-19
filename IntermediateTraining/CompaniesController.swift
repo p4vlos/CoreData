@@ -8,10 +8,14 @@
 
 import UIKit
 
-class CompaniesController: UITableViewController {
+class CompaniesController: UITableViewController, CreateCompanyControllerDelegate {
     
-    //let: constant
-    //var: variable that can be modifield
+    func didAddCompany(company: Company) {
+        companies.append(company)
+        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
+        tableView.insertRows(at: [newIndexPath], with: .automatic)
+    }
+    
     var companies = [
         Company(name: "Apple", founded: Date()),
         Company(name: "Google", founded: Date()),
@@ -19,12 +23,7 @@ class CompaniesController: UITableViewController {
     ]
     
     func addCompany(company: Company) {
-        //1 - modify your array
-        companies.append(company)
         
-        //2 - insert new index path into tableView
-        let newIndexPath = IndexPath(row: companies.count - 1, section: 0)
-        tableView.insertRows(at: [newIndexPath], with: .automatic)
     }
 
     override func viewDidLoad() {
@@ -51,7 +50,7 @@ class CompaniesController: UITableViewController {
         let createCompanyController = CreateCompanyController()
         let navController = UINavigationController(rootViewController: createCompanyController)
         
-        createCompanyController.companiesController = self
+        createCompanyController.delegate = self
         
         present(navController, animated: true, completion: nil)
     }

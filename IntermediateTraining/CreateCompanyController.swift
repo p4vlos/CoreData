@@ -8,9 +8,15 @@
 
 import UIKit
 
+//Custom Delegation
+
+protocol CreateCompanyControllerDelegate {
+    func didAddCompany(company: Company)
+}
+
 class CreateCompanyController: UIViewController {
     
-    var companiesController: CompaniesController?
+    var delegate: CreateCompanyControllerDelegate?
     
     let nameLabel: UILabel = {
         let label = UILabel()
@@ -43,12 +49,13 @@ class CreateCompanyController: UIViewController {
     }
     
     @objc private func handleSave() {
-        dismiss(animated: true, completion: nil)
         
-        guard let name = nameTextField.text else { return }
-        
-        let company = Company(name: name, founded: Date())
-        companiesController?.addCompany(company: company)
+        dismiss(animated: true) {
+            guard let name = self.nameTextField.text else { return }
+            
+            let company = Company(name: name, founded: Date())
+            self.delegate?.didAddCompany(company: company)
+        }
     }
     
     @objc private func setupUI() {
