@@ -32,15 +32,13 @@ class CompaniesController: UITableViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
         
-        
-        setupNavigationStyle()
     }
     
     @objc func handleAddCompany() {
         print("Adding")
         
-        let createCompanyController = UIViewController()
-        createCompanyController.view.backgroundColor = .green
+        let createCompanyController = CreateCompanyController()
+//        createCompanyController.view.backgroundColor = .green
         
         let navController = UINavigationController(rootViewController: createCompanyController)
         
@@ -75,17 +73,6 @@ class CompaniesController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
-    }
-    
-    func setupNavigationStyle() {
-        navigationController?.navigationBar.isTranslucent = false
-        
-        
-        navigationController?.navigationBar.barTintColor = .lightRed
-        navigationController?.navigationBar.prefersLargeTitles = true
-        
-        navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
-        navigationController?.navigationBar.titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
     }
 
 }
