@@ -8,7 +8,13 @@
 
 import UIKit
 
-class ViewController: UITableViewController {
+class CompaniesController: UITableViewController {
+    
+    let companies = [
+        Company(name: "Apple", founded: Date()),
+        Company(name: "Google", founded: Date()),
+        Company(name: "Amazon", founded: Date())
+    ]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +38,13 @@ class ViewController: UITableViewController {
     
     @objc func handleAddCompany() {
         print("Adding")
+        
+        let createCompanyController = UIViewController()
+        createCompanyController.view.backgroundColor = .green
+        
+        let navController = UINavigationController(rootViewController: createCompanyController)
+        
+        present(navController, animated: true, completion: nil)
     }
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -50,7 +63,10 @@ class ViewController: UITableViewController {
         
         
         cell.backgroundColor = .tealColor
-        cell.textLabel?.text = "The Company Name"
+        
+        let company = companies[indexPath.row].name
+        cell.textLabel?.text = company
+        
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
         
@@ -58,7 +74,7 @@ class ViewController: UITableViewController {
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 8 //arbitrary
+        return companies.count
     }
     
     func setupNavigationStyle() {
