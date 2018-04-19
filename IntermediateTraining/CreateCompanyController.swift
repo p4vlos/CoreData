@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 //Custom Delegation
 
@@ -52,12 +53,21 @@ class CreateCompanyController: UIViewController {
     
     @objc private func handleSave() {
         
-        dismiss(animated: true) {
-            guard let name = self.nameTextField.text else { return }
-            
-            let company = Company(name: name, founded: Date())
-            self.delegate?.didAddCompany(company: company)
+        //initialization of our Core Data stack
+        
+        let persistentContainer = NSPersistentContainer(name: "IntermidiateTrainingModels")
+        persistentContainer.loadPersistentStores { (storeDescription, err) in
+            if let err = err {
+                
+            }
         }
+        
+//        dismiss(animated: true) {
+//            guard let name = self.nameTextField.text else { return }
+//
+//            let company = Company(name: name, founded: Date())
+//            self.delegate?.didAddCompany(company: company)
+//        }
     }
     
     @objc private func setupUI() {
