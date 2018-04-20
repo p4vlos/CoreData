@@ -19,21 +19,44 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     
     var companies = [Company]() //empty array
     
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
+            let company = self.companies[indexPath.row]
+            print("Attempting to delete company: ", company.name ?? "")
+            
+            //remove the company from our tableview
+            self.companies.remove(at: indexPath.row)
+            self.tableView.deleteRows(at: [indexPath], with: .automatic)
+            
+            //delete the company from CoreData
+            let context = CoreDataManager.shared.persistentContainer.viewContext
+            context.delete(company)
+            do {
+                try context.save()
+            } catch let saveErr {
+                print("Failed to delete company: ", saveErr)
+            }
+            
+        }
+        
+        let editAction = UITableViewRowAction(style: .normal, title: "Edit") { (_, indexPath) in
+            print("Edit company...")
+            
+            
+            //edit the company from our tableview
+            
+            //edit the company from CoreData
+            
+        }
+        
+        return [deleteAction, editAction]
+    }
+    
     private func fetchComapnies() {
         //attempt my core data fetch
         //initialization of our Core Data stack
-//        let persistentContainer = NSPersistentContainer(name: "IntermidiateTrainingModels")
-//        persistentContainer.loadPersistentStores { (storeDescription, err) in
-//            if let err = err {
-//                fatalError("Loading of store failed: \(err)")
-//            }
-//        }
-//
-//        let context = persistentContainer.viewContext
-        
         let context = CoreDataManager.shared.persistentContainer.viewContext
-    
-        
+
         let fetchRequest = NSFetchRequest<Company>(entityName: "Company")
         
         do {
