@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E0F1DCE2088B67A008B525E /* UIColor+theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0F1DCD2088B67A008B525E /* UIColor+theme.swift */; };
+		3E2A23922089CD8B00705227 /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E2A23912089CD8B00705227 /* CoreDataManager.swift */; };
 		3E3C61B22088C4270067AAA5 /* Company.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C61B12088C4270067AAA5 /* Company.swift */; };
 		3E3C61B42088CA430067AAA5 /* CreateCompanyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C61B32088CA430067AAA5 /* CreateCompanyController.swift */; };
 		3E3C61B72088E83D0067AAA5 /* IntermidiateTrainingModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3E3C61B52088E83D0067AAA5 /* IntermidiateTrainingModels.xcdatamodeld */; };
@@ -20,6 +21,7 @@
 
 /* Begin PBXFileReference section */
 		3E0F1DCD2088B67A008B525E /* UIColor+theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+theme.swift"; sourceTree = "<group>"; };
+		3E2A23912089CD8B00705227 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		3E3C61B12088C4270067AAA5 /* Company.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Company.swift; sourceTree = "<group>"; };
 		3E3C61B32088CA430067AAA5 /* CreateCompanyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateCompanyController.swift; sourceTree = "<group>"; };
 		3E3C61B62088E83D0067AAA5 /* IntermidiateTrainingModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntermidiateTrainingModels.xcdatamodel; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 				3E0F1DCD2088B67A008B525E /* UIColor+theme.swift */,
 				3E3C61B12088C4270067AAA5 /* Company.swift */,
 				3E3C61B52088E83D0067AAA5 /* IntermidiateTrainingModels.xcdatamodeld */,
+				3E2A23912089CD8B00705227 /* CoreDataManager.swift */,
 			);
 			path = IntermediateTraining;
 			sourceTree = "<group>";
@@ -153,6 +156,7 @@
 				3E0F1DCE2088B67A008B525E /* UIColor+theme.swift in Sources */,
 				3E5D845D1FED7B8F00F6DB68 /* CompaniesController.swift in Sources */,
 				3E5D845B1FED7B8F00F6DB68 /* AppDelegate.swift in Sources */,
+				3E2A23922089CD8B00705227 /* CoreDataManager.swift in Sources */,
 				3E3C61B42088CA430067AAA5 /* CreateCompanyController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

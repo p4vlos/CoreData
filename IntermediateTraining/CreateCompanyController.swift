@@ -17,7 +17,6 @@ protocol CreateCompanyControllerDelegate {
 
 class CreateCompanyController: UIViewController {
     
-    
     //not tightly-coupled
     var delegate: CreateCompanyControllerDelegate?
     
@@ -53,15 +52,7 @@ class CreateCompanyController: UIViewController {
     
     @objc private func handleSave() {
         
-        //initialization of our Core Data stack
-        let persistentContainer = NSPersistentContainer(name: "IntermidiateTrainingModels")
-        persistentContainer.loadPersistentStores { (storeDescription, err) in
-            if let err = err {
-                fatalError("Loading of store failed: \(err)")
-            }
-        }
-        
-        let context = persistentContainer.viewContext
+        let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
         
@@ -70,6 +61,12 @@ class CreateCompanyController: UIViewController {
         //perform the save
         do {
             try context.save()
+            
+            //success
+            
+            dismiss(animated: true) {
+                self.delegate?.didAddCompany(company: company as! Company)
+            }
         } catch let saveErr {
             print("Failed to save compnay: " , saveErr)
         }
