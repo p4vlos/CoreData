@@ -43,6 +43,13 @@ class CreateCompanyController: UIViewController {
         return textField
     }()
     
+    let datePicker: UIDatePicker = {
+        let dp = UIDatePicker()
+        dp.translatesAutoresizingMaskIntoConstraints = false
+        dp.datePickerMode = .date
+        return dp
+    }()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -117,7 +124,7 @@ class CreateCompanyController: UIViewController {
         lightBlueBackroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         lightBlueBackroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         lightBlueBackroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        lightBlueBackroundView.heightAnchor.constraint(equalToConstant: 50).isActive = true
+        lightBlueBackroundView.heightAnchor.constraint(equalToConstant: 250).isActive = true
         
         
         view.addSubview(nameLabel)
@@ -131,6 +138,13 @@ class CreateCompanyController: UIViewController {
         nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         nameTextField.topAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
+        
+        //setup DatePicker here
+        view.addSubview(datePicker)
+        datePicker.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
+        datePicker.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        datePicker.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        datePicker.bottomAnchor.constraint(equalTo: lightBlueBackroundView.bottomAnchor).isActive = true
         
     }
     
