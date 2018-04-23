@@ -55,10 +55,6 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         return [deleteAction, editAction]
     }
     
-//    func didEditCompany(company: Company) {
-//        
-//    }
-    
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
         
         let editCompanyController = CreateCompanyController()
@@ -140,8 +136,24 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         
         cell.backgroundColor = .tealColor
         
-        let company = companies[indexPath.row].name
-        cell.textLabel?.text = company
+        let company = companies[indexPath.row]
+        
+        if let name = company.name, let founded = company.founded {
+            
+            // MM, dd, yyyy
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat =  "dd/MM/yyyy"
+            
+            let foundedDataString = dateFormatter.string(from: founded)
+            
+//            let locale = Locale(identifier: "EN")
+            
+            let dateString = "\(name) - Founded: \(foundedDataString)"
+            
+            cell.textLabel?.text = dateString
+        } else {
+            cell.textLabel?.text = company.name
+        }
         
         cell.textLabel?.textColor = .white
         cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
