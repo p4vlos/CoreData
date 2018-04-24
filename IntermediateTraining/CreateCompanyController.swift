@@ -28,6 +28,10 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         didSet {
             nameTextField.text = company?.name
             
+            if let imageData = company?.imageData {
+                companyImageView.image = UIImage(data: imageData)
+            }
+            
             guard let founded = company?.founded else { return }
             datePicker.date = founded
         }
@@ -86,6 +90,8 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let editedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            
             companyImageView.image = editedImage
         } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             companyImageView.image = originalImage
@@ -146,6 +152,11 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         
         company.setValue(nameTextField.text, forKey: "name")
         company.setValue(datePicker.date, forKey: "founded")
+        
+        if let companyImage = companyImageView.image {
+             let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
+            company.setValue(imageData, forKey: "imageData")
+        }
         
         //perform the save
         do {
