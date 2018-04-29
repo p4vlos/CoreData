@@ -129,6 +129,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
                 let indexPath = IndexPath(row: index, section: 0)
                 indexPathsToRemove.append(indexPath)
             }
+            
             companies.removeAll()
             tableView.deleteRows(at: indexPathsToRemove, with: .left)
             
