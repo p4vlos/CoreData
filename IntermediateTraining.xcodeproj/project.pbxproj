@@ -17,6 +17,7 @@
 		3E5D84601FED7B8F00F6DB68 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D845E1FED7B8F00F6DB68 /* Main.storyboard */; };
 		3E5D84621FED7B8F00F6DB68 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D84611FED7B8F00F6DB68 /* Assets.xcassets */; };
 		3E5D84651FED7B8F00F6DB68 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3E5D84631FED7B8F00F6DB68 /* LaunchScreen.storyboard */; };
+		3EE379712096303F00F57A26 /* CompanyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EE379702096303F00F57A26 /* CompanyCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		3E5D84611FED7B8F00F6DB68 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3E5D84641FED7B8F00F6DB68 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3E5D84661FED7B8F00F6DB68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3EE379702096303F00F57A26 /* CompanyCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompanyCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,8 +66,8 @@
 		3E5D84591FED7B8F00F6DB68 /* IntermediateTraining */ = {
 			isa = PBXGroup;
 			children = (
+				3EE37972209631B500F57A26 /* Companies */,
 				3E5D845A1FED7B8F00F6DB68 /* AppDelegate.swift */,
-				3E5D845C1FED7B8F00F6DB68 /* CompaniesController.swift */,
 				3E3C61B32088CA430067AAA5 /* CreateCompanyController.swift */,
 				3E5D845E1FED7B8F00F6DB68 /* Main.storyboard */,
 				3E5D84611FED7B8F00F6DB68 /* Assets.xcassets */,
@@ -77,6 +79,15 @@
 				3E2A23912089CD8B00705227 /* CoreDataManager.swift */,
 			);
 			path = IntermediateTraining;
+			sourceTree = "<group>";
+		};
+		3EE37972209631B500F57A26 /* Companies */ = {
+			isa = PBXGroup;
+			children = (
+				3E5D845C1FED7B8F00F6DB68 /* CompaniesController.swift */,
+				3EE379702096303F00F57A26 /* CompanyCell.swift */,
+			);
+			path = Companies;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -154,6 +165,7 @@
 				3E3C61B72088E83D0067AAA5 /* IntermidiateTrainingModels.xcdatamodeld in Sources */,
 				3E3C61B22088C4270067AAA5 /* Company.swift in Sources */,
 				3E0F1DCE2088B67A008B525E /* UIColor+theme.swift in Sources */,
+				3EE379712096303F00F57A26 /* CompanyCell.swift in Sources */,
 				3E5D845D1FED7B8F00F6DB68 /* CompaniesController.swift in Sources */,
 				3E5D845B1FED7B8F00F6DB68 /* AppDelegate.swift in Sources */,
 				3E2A23922089CD8B00705227 /* CoreDataManager.swift in Sources */,

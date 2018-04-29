@@ -104,7 +104,7 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
         tableView.separatorColor = .white
         tableView.tableFooterView = UIView() //blank UIView
         
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cellId")
+        tableView.register(CompanyCell.self, forCellReuseIdentifier: "cellId")
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleAddCompany))
     }
@@ -176,40 +176,14 @@ class CompaniesController: UITableViewController, CreateCompanyControllerDelegat
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath)
-        
-        
-        cell.backgroundColor = .tealColor
-        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cellId", for: indexPath) as! CompanyCell
         let company = companies[indexPath.row]
-        
-        if let name = company.name, let founded = company.founded {
-            
-            // MM, dd, yyyy
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat =  "dd/MM/yyyy"
-            
-            let foundedDataString = dateFormatter.string(from: founded)
-            
-//            let locale = Locale(identifier: "EN")
-            
-            let dateString = "\(name) - Founded: \(foundedDataString)"
-            
-            cell.textLabel?.text = dateString
-        } else {
-            cell.textLabel?.text = company.name
-        }
-        
-        cell.textLabel?.textColor = .white
-        cell.textLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        
-        cell.imageView?.image = #imageLiteral(resourceName: "select_photo_empty")
-        
-        if let imageData = company.imageData {
-            cell.imageView?.image = UIImage(data: imageData)
-        }
-        
+        cell.company = company
         return cell
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 60
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
