@@ -37,6 +37,21 @@ class CreateEmployeeController: UIViewController {
         _ = setupLightBackgroundView(height: 50)
         
         setupUI()
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
+    }
+    
+    @objc private func handleSave() {
+        guard let employeeName = nameTextField.text else { return }
+        let error = CoreDataManager.shared.createEmployee(employeeName: employeeName)
+        
+        if let error = error {
+            //is where you present an error model of some kind
+            //perhaps use a UIAlertController to show your error message
+            print(error)
+        } else {
+            dismiss(animated: true, completion: nil)
+        }
     }
     
     private func setupUI() {
@@ -51,5 +66,6 @@ class CreateEmployeeController: UIViewController {
         nameTextField.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         nameTextField.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         nameTextField.topAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
+        
     }
 }
