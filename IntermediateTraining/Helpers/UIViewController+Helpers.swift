@@ -22,4 +22,18 @@ extension UIViewController {
     @objc func handleCancelModel() {
         dismiss(animated: true, completion: nil)
     }
+    
+    func setupLightBackgroundView(height: CGFloat) -> UIView {
+        let lightBlueBackroundView = UIView()
+        lightBlueBackroundView.backgroundColor = .lightBlue
+        lightBlueBackroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        view.addSubview(lightBlueBackroundView)
+        lightBlueBackroundView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        lightBlueBackroundView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        lightBlueBackroundView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        lightBlueBackroundView.heightAnchor.constraint(equalToConstant: height).isActive = true
+        
+        return lightBlueBackroundView
+    }
 }
