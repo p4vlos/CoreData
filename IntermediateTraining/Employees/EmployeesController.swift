@@ -9,6 +9,15 @@
 import UIKit
 import CoreData
 
+//lets create a UILabel subclass for custom text drawing
+class IndentedLabel: UILabel {
+    override func drawText(in rect: CGRect) {
+        let insets = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 0)
+        let customRect = UIEdgeInsetsInsetRect(rect, insets)
+        super.drawText(in: customRect)
+    }
+}
+
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
     
     func didAddEmployee(employee: Employee) {
@@ -27,34 +36,76 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
        
     }
     
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let label = IndentedLabel()
+        if section == 0 {
+            label.text = "Short names"
+        } else {
+            label.text = "Long names"
+        }
+        label.text = "HEADER"
+        label.textColor = .darkBlue
+        label.backgroundColor = .lightBlue
+        label.font = UIFont.boldSystemFont(ofSize: 16)
+        return label
+    }
+    
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    var shortNameEmployees = [Employee]()
+    var longNameEmployees = [Employee]()
+    
+    var allEmployees = [[Employee]]()
+    
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
-        self.employees = companyEmployees
+//        self.employees = companyEmployees
         
-//        print("Trying to fetch employees...")
-//
-//        let context  = CoreDataManager.shared.persistentContainer.viewContext
-//        let request = NSFetchRequest<Employee>(entityName: "Employee")
-//
-//        do {
-//            let employees = try context.fetch(request)
-//            self.employees = employees
-//
-////            employees.forEach { print("Employee name: ", $0.name ?? "")}
-//        } catch let err {
-//            print("Failed to fetch employees:", err)
-//        }
+        shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+            if let count = employee.name?.count {
+                return count < 6
+            }
+            return false
+        })
+        
+        longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
+            if let count = employee.name?.count {
+                return count > 6
+            } else {
+                return false
+            }
+        })
+        
+        allEmployees = [
+            shortNameEmployees,
+            longNameEmployees]
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return employees.count
+        return allEmployees[section].count
+    }
+    
+    override func numberOfSections(in tableView: UITableView) -> Int {
+        return allEmployees.count
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
         
-        let employee = employees[indexPath.row]
-        cell.textLabel?.text = employee.name
+//        if indexPath.section == 0 {
+//            employee = shortName
+//        }
+        
+        //I will use a ternary operator
+//        let employee = employees[indexPath.row]
+        
+//        let employee = indexPath.section == 0 ? shortNameEmployees[indexPath.row] : longNameEmployees[indexPath.row]
+      
+        
+        let employee = allEmployees[indexPath.section][indexPath.row]
+          cell.textLabel?.text = employee.name
         
         if let birthday = employee.employeeInformation?.birthday {
             let dateFormatter = DateFormatter()
