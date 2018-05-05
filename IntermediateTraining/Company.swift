@@ -1,9 +1,9 @@
 //
-//  Compay.swift
+//  Company.swift
 //  IntermediateTraining
 //
-//  Created by Pavlos Nicolaou on 19/04/2018.
-//  Copyright © 2018 Pavlos Nicolaou. All rights reserved.
+//  Created by Brian Voong on 10/23/17.
+//  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
 import Foundation
@@ -12,3 +12,5 @@ import Foundation
 //    let name: String
 //    let founded: Date
 //}
+
+//Company(name: "abc", founded: Date())

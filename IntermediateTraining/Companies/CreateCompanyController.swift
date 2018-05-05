@@ -1,28 +1,22 @@
 //
-//  CraeteCompanyController.swift
+//  CreateCompanyController.swift
 //  IntermediateTraining
 //
-//  Created by Pavlos Nicolaou on 19/04/2018.
-//  Copyright © 2018 Pavlos Nicolaou. All rights reserved.
+//  Created by Brian Voong on 10/23/17.
+//  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
 import UIKit
 import CoreData
 
-//Custom Delegation
+// Custom Delegation
 
 protocol CreateCompanyControllerDelegate {
     func didAddCompany(company: Company)
     func didEditCompany(company: Company)
 }
 
-extension UINavigationController {
-    open override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
-    }
-}
-
-class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CreateCompanyController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     var company: Company? {
         didSet {
@@ -34,6 +28,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
             }
             
             guard let founded = company?.founded else { return }
+            
             datePicker.date = founded
         }
     }
@@ -45,15 +40,58 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         companyImageView.layer.borderWidth = 2
     }
     
-    //not tightly-coupled
+    // not tightly-coupled
     var delegate: CreateCompanyControllerDelegate?
+    
+//    var companiesController: CompaniesController?
+    
+    lazy var companyImageView: UIImageView = {
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFill
+        imageView.isUserInteractionEnabled = true // remember to do this, otherwise image views by default are not interactive
+        
+        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
+        
+        return imageView
+    }()
+    
+    @objc private func handleSelectPhoto() {
+        print("Trying to select photo...")
+        
+        let imagePickerController = UIImagePickerController()
+        
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        
+        if let editedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+            
+            companyImageView.image = editedImage
+            
+        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            companyImageView.image = originalImage
+        }
+        
+        setupCircularImageStyle()
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
     
     let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "Name"
         //enable autolayout
         label.translatesAutoresizingMaskIntoConstraints = false
-        
         return label
     }()
     
@@ -66,46 +104,10 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
     
     let datePicker: UIDatePicker = {
         let dp = UIDatePicker()
-        dp.translatesAutoresizingMaskIntoConstraints = false
         dp.datePickerMode = .date
+        dp.translatesAutoresizingMaskIntoConstraints = false
         return dp
     }()
-    
-    lazy var companyImageView: UIImageView = {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "select_photo_empty"))
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFill
-        
-        imageView.isUserInteractionEnabled = true //remember to do this, otherwise iamge views by defualt are not interactive
-        
-        imageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(handleSelectPhoto)))
-        
-        return imageView
-    }()
-    
-    @objc private func handleSelectPhoto() {
-        let imagePickerController = UIImagePickerController()
-        
-        imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
-        present(imagePickerController, animated: true, completion: nil)
-        
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
-        if let editedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            companyImageView.image = editedImage
-        } else if let originalImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            companyImageView.image = originalImage
-        }
-        setupCircularImageStyle()
-        dismiss(animated: true, completion: nil)
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -123,7 +125,7 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: .plain, target: self, action: #selector(handleSave))
         
-        view.backgroundColor = .darkBlue
+        view.backgroundColor = UIColor.darkBlue
     }
     
     @objc private func handleSave() {
@@ -148,17 +150,18 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         do {
             try context.save()
             
-            //save succeded
-            dismiss(animated: true) {
+            // save succeeded
+            dismiss(animated: true, completion: {
                 self.delegate?.didEditCompany(company: self.company!)
-            }
+            })
             
         } catch let saveErr {
-            print("Failed to save company changes: " , saveErr)
+            print("Failed to save company changes:", saveErr)
         }
     }
     
     private func createCompany() {
+        print("Trying to save company...")
         let context = CoreDataManager.shared.persistentContainer.viewContext
         
         let company = NSEntityDescription.insertNewObject(forEntityName: "Company", into: context)
@@ -167,32 +170,33 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         company.setValue(datePicker.date, forKey: "founded")
         
         if let companyImage = companyImageView.image {
-             let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
+            let imageData = UIImageJPEGRepresentation(companyImage, 0.8)
             company.setValue(imageData, forKey: "imageData")
         }
         
-        //perform the save
+        // perform the save
         do {
             try context.save()
             
-            //success
-            
-            dismiss(animated: true) {
+            // success
+            dismiss(animated: true, completion: {
                 self.delegate?.didAddCompany(company: company as! Company)
-            }
+            })
+            
         } catch let saveErr {
-            print("Failed to save compnay: " , saveErr)
+            print("Failed to save company:", saveErr)
         }
     }
     
-    @objc private func setupUI() {
-        let lightBlueBackroundView = setupLightBackgroundView(height: 350)
+    private func setupUI() {
+        let lightBlueBackgroundView = setupLightBlueBackgroundView(height: 350)
         
         view.addSubview(companyImageView)
         companyImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 8).isActive = true
         companyImageView.heightAnchor.constraint(equalToConstant: 100).isActive = true
         companyImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         companyImageView.widthAnchor.constraint(equalToConstant: 100).isActive = true
+        
         
         view.addSubview(nameLabel)
         nameLabel.topAnchor.constraint(equalTo: companyImageView.bottomAnchor).isActive = true
@@ -206,12 +210,21 @@ class CreateCompanyController: UIViewController, UIImagePickerControllerDelegate
         nameTextField.bottomAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         nameTextField.topAnchor.constraint(equalTo: nameLabel.topAnchor).isActive = true
         
-        //setup DatePicker here
+        // setup the date picker here
+        
         view.addSubview(datePicker)
         datePicker.topAnchor.constraint(equalTo: nameLabel.bottomAnchor).isActive = true
         datePicker.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         datePicker.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        datePicker.bottomAnchor.constraint(equalTo: lightBlueBackroundView.bottomAnchor).isActive = true
-        
+        datePicker.bottomAnchor.constraint(equalTo: lightBlueBackgroundView.bottomAnchor).isActive = true
     }
+    
 }
+
+
+
+
+
+
+
+

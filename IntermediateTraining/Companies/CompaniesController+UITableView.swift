@@ -2,8 +2,8 @@
 //  CompaniesController+UITableView.swift
 //  IntermediateTraining
 //
-//  Created by Pavlos Nicolaou on 30/04/2018.
-//  Copyright © 2018 Pavlos Nicolaou. All rights reserved.
+//  Created by Brian Voong on 10/27/17.
+//  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
 import UIKit
@@ -12,33 +12,32 @@ extension CompaniesController {
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let company = companies[indexPath.row]
+        let company = self.companies[indexPath.row]
         let employeesController = EmployeesController()
         employeesController.company = company
-        
         navigationController?.pushViewController(employeesController, animated: true)
     }
-
+    
     override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        
         let deleteAction = UITableViewRowAction(style: .destructive, title: "Delete") { (_, indexPath) in
             let company = self.companies[indexPath.row]
-            print("Attempting to delete company: ", company.name ?? "")
+            print("Attempting to delete company:", company.name ?? "")
             
-            //remove the company from our tableview
             self.companies.remove(at: indexPath.row)
             self.tableView.deleteRows(at: [indexPath], with: .automatic)
             
-            //delete the company from CoreData
+            // delete the company from Core Data
             let context = CoreDataManager.shared.persistentContainer.viewContext
+            
             context.delete(company)
+            
             do {
                 try context.save()
             } catch let saveErr {
-                print("Failed to delete company: ", saveErr)
+                print("Failed to delete company:", saveErr)
             }
-            
         }
-        
         deleteAction.backgroundColor = UIColor.lightRed
         
         let editAction = UITableViewRowAction(style: .normal, title: "Edit", handler: editHandlerFunction)
@@ -48,6 +47,7 @@ extension CompaniesController {
     }
     
     private func editHandlerFunction(action: UITableViewRowAction, indexPath: IndexPath) {
+        print("Editing company in separate function")
         
         let editCompanyController = CreateCompanyController()
         editCompanyController.delegate = self
@@ -75,7 +75,6 @@ extension CompaniesController {
         return view
     }
     
-    
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 50
     }
@@ -94,4 +93,5 @@ extension CompaniesController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return companies.count
     }
+    
 }

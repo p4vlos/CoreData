@@ -2,8 +2,8 @@
 //  CompanyCell.swift
 //  IntermediateTraining
 //
-//  Created by Pavlos Nicolaou on 29/04/2018.
-//  Copyright © 2018 Pavlos Nicolaou. All rights reserved.
+//  Created by Brian Voong on 10/27/17.
+//  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
 import UIKit
@@ -19,19 +19,14 @@ class CompanyCell: UITableViewCell {
             }
             
             if let name = company?.name, let founded = company?.founded {
-                
                 let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat =  "dd/MM/yyyy"
-                
-                let foundedDataString = dateFormatter.string(from: founded)
-                
-                let dateString = "\(name) - Founded: \(foundedDataString)"
-                
+                dateFormatter.dateFormat = "MMM dd, yyyy"
+                let foundedDateString = dateFormatter.string(from: founded)
+                let dateString = "\(name) - Founded: \(foundedDateString)"
                 nameFoundedDateLabel.text = dateString
             } else {
                 nameFoundedDateLabel.text = company?.name
             }
-
         }
     }
     
@@ -59,7 +54,7 @@ class CompanyCell: UITableViewCell {
     override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         
-        backgroundColor = .tealColor
+        backgroundColor = UIColor.tealColor
         
         addSubview(companyImageView)
         companyImageView.heightAnchor.constraint(equalToConstant: 40).isActive = true
@@ -72,10 +67,19 @@ class CompanyCell: UITableViewCell {
         nameFoundedDateLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
         nameFoundedDateLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         nameFoundedDateLabel.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
+
+
+
+
+
+
+
+
+

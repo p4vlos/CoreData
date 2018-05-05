@@ -2,14 +2,20 @@
 //  AppDelegate.swift
 //  IntermediateTraining
 //
-//  Created by Pavlos Nicolaou on 22/12/2017.
-//  Copyright © 2017 Pavlos Nicolaou. All rights reserved.
+//  Created by Brian Voong on 10/21/17.
+//  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
 import UIKit
 
 class CustomNavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+}
+
+extension UINavigationController {
+    open override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
 }
@@ -22,20 +28,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-        
-        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().tintColor = .white
+        UINavigationBar.appearance().isTranslucent = false
         UINavigationBar.appearance().barTintColor = .lightRed
         UINavigationBar.appearance().prefersLargeTitles = true
-        
-        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
+        UINavigationBar.appearance().largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor: UIColor.white]
         
         window = UIWindow()
         window?.makeKeyAndVisible()
         
         let companiesController = CompaniesController()
-    
+//        dummyViewController.view.backgroundColor = .blue
         let navController = CustomNavigationController(rootViewController: companiesController)
         window?.rootViewController = navController
         
