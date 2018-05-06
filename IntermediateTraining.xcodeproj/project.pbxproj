@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3E940BAC209F8FCF0043471D /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E940BAB209F8FCF0043471D /* EmployeeType.swift */; };
 		C720C0B31F9BE1B3006195A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C720C0B21F9BE1B3006195A0 /* AppDelegate.swift */; };
 		C720C0B51F9BE1B3006195A0 /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C720C0B41F9BE1B3006195A0 /* CompaniesController.swift */; };
 		C720C0B81F9BE1B3006195A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C720C0B61F9BE1B3006195A0 /* Main.storyboard */; };
@@ -26,6 +27,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3E940BAB209F8FCF0043471D /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 		C720C0AF1F9BE1B3006195A0 /* IntermediateTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntermediateTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C720C0B21F9BE1B3006195A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C720C0B41F9BE1B3006195A0 /* CompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesController.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 			children = (
 				C72CADE31FA522F1006F2E12 /* EmployeesController.swift */,
 				C72CADF01FA529A1006F2E12 /* CreateEmployeeController.swift */,
+				3E940BAB209F8FCF0043471D /* EmployeeType.swift */,
 			);
 			path = Employees;
 			sourceTree = "<group>";
@@ -200,6 +203,7 @@
 				C72CADEF1FA528C6006F2E12 /* UIViewController+Helpers.swift in Sources */,
 				C72CADD21FA3C0FB006F2E12 /* CompanyCell.swift in Sources */,
 				C72CADD71FA3CFAD006F2E12 /* CompaniesController+UITableView.swift in Sources */,
+				3E940BAC209F8FCF0043471D /* EmployeeType.swift in Sources */,
 				C72CADF11FA529A1006F2E12 /* CreateEmployeeController.swift in Sources */,
 				C72CADE41FA522F1006F2E12 /* EmployeesController.swift in Sources */,
 				C720C0B31F9BE1B3006195A0 /* AppDelegate.swift in Sources */,

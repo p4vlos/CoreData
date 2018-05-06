@@ -39,11 +39,11 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IndentedLabel()
         if section == 0 {
-            label.text = "Short names"
+            label.text = EmployeeType.Executive.rawValue
         } else if section == 1 {
-            label.text = "Long names"
+            label.text = EmployeeType.SeniorManagement.rawValue
         } else {
-            label.text = "Really Long names"
+            label.text = EmployeeType.Staff.rawValue
         }
         label.backgroundColor = UIColor.lightBlue
         label.textColor = UIColor.darkBlue
@@ -55,45 +55,27 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
         return 50
     }
     
-    var shortNameEmployees = [Employee]()
-    var longNameEmployees = [Employee]()
-    var reallyLongNameEmployees = [Employee]()
-    
     var allEmployees = [[Employee]]()
     
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
         
-        shortNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count < 6
-            }
-            return false
-        })
+      // let's filter employees for "Executives"
         
-        longNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count > 6 && count < 9
-            }
-            return false
-        })
+        let executives = companyEmployees.filter { (employee) -> Bool in
+            return employee.type == EmployeeType.Executive.rawValue
+        }
         
-        reallyLongNameEmployees = companyEmployees.filter({ (employee) -> Bool in
-            if let count = employee.name?.count {
-                return count > 9
-            }
-            return false
-        })
+        let seniorManagement = companyEmployees.filter {
+            $0.type == EmployeeType.SeniorManagement.rawValue
+        }
         
         allEmployees = [
-            shortNameEmployees,
-            longNameEmployees,
-            reallyLongNameEmployees
+            executives,
+            seniorManagement,
+            companyEmployees.filter { $0.type == EmployeeType.Staff.rawValue }
         ]
         
-        print(shortNameEmployees.count, longNameEmployees.count, reallyLongNameEmployees.count)
-        
-//        self.employees = companyEmployees
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
