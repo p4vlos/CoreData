@@ -23,8 +23,21 @@ class IndentedLabel: UILabel {
 class EmployeesController: UITableViewController, CreateEmployeeControllerDelegate {
     
     func didAddEmployee(employee: Employee) {
-        employees.append(employee)
-        tableView.reloadData()
+//        employees.append(employee)
+//        fetchEmployees()
+//        tableView.reloadData()
+        
+        // what is the insertion  index path
+        
+        guard let section = employeeTypes.index(of: employee.type!) else { return }
+        
+        let row = allEmployees[section].count
+        
+        let insertionIndexPath = IndexPath(row: row, section: section)
+        allEmployees[section].append(employee)
+        
+        tableView.insertRows(at: [insertionIndexPath], with: .middle)
+        
     }
     
     var company: Company?
@@ -38,13 +51,16 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     
     override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let label = IndentedLabel()
-        if section == 0 {
-            label.text = EmployeeType.Executive.rawValue
-        } else if section == 1 {
-            label.text = EmployeeType.SeniorManagement.rawValue
-        } else {
-            label.text = EmployeeType.Staff.rawValue
-        }
+//        if section == 0 {
+//            label.text = EmployeeType.Executive.rawValue
+//        } else if section == 1 {
+//            label.text = EmployeeType.SeniorManagement.rawValue
+//        } else {
+//            label.text = EmployeeType.Staff.rawValue
+//        }
+        
+        label.text = employeeTypes[section]
+        
         label.backgroundColor = UIColor.lightBlue
         label.textColor = UIColor.darkBlue
         label.font = UIFont.boldSystemFont(ofSize: 16)
@@ -57,24 +73,44 @@ class EmployeesController: UITableViewController, CreateEmployeeControllerDelega
     
     var allEmployees = [[Employee]]()
     
+    var employeeTypes = [
+        EmployeeType.Executive.rawValue,
+        EmployeeType.SeniorManagement.rawValue,
+        EmployeeType.Staff.rawValue
+    ]
+    
     private func fetchEmployees() {
         guard let companyEmployees = company?.employees?.allObjects as? [Employee] else { return }
         
-      // let's filter employees for "Executives"
+        allEmployees = []
         
-        let executives = companyEmployees.filter { (employee) -> Bool in
-            return employee.type == EmployeeType.Executive.rawValue
+        // Let's use my array and loop to filter instead
+        
+        employeeTypes.forEach { (employeeType) in
+            
+            // somehow construct my allEmployees array
+            
+            allEmployees.append(
+                companyEmployees.filter { $0.type == employeeType }
+            
+            )
         }
         
-        let seniorManagement = companyEmployees.filter {
-            $0.type == EmployeeType.SeniorManagement.rawValue
-        }
-        
-        allEmployees = [
-            executives,
-            seniorManagement,
-            companyEmployees.filter { $0.type == EmployeeType.Staff.rawValue }
-        ]
+//        // let's filter employees for "Executives"
+//
+//        let executives = companyEmployees.filter { (employee) -> Bool in
+//            return employee.type == EmployeeType.Executive.rawValue
+//        }
+//
+//        let seniorManagement = companyEmployees.filter {
+//            $0.type == EmployeeType.SeniorManagement.rawValue
+//        }
+//
+//        allEmployees = [
+//            executives,
+//            seniorManagement,
+//            companyEmployees.filter { $0.type == EmployeeType.Staff.rawValue }
+//        ]
         
     }
     
