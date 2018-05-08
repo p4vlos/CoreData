@@ -15,12 +15,10 @@ class CompaniesController: UITableViewController {
     
     @objc private func doWork() {
         
-        
-        
         // creating some Company objects on a background thread
         
         CoreDataManager.shared.persistentContainer.performBackgroundTask({ (backgroundContext) in
-            (0...100000).forEach { (value) in
+            (0...5).forEach { (value) in
                 print(value)
                 let company = Company(context: backgroundContext)
                 company.name = String()
@@ -28,6 +26,11 @@ class CompaniesController: UITableViewController {
             
             do {
                 try backgroundContext.save()
+                
+                DispatchQueue.main.async {
+                    self.companies = CoreDataManager.shared.fetchCompanies()
+                    self.tableView.reloadData()
+                }
             } catch let err {
                 print("Failed to save:", err)
             }
