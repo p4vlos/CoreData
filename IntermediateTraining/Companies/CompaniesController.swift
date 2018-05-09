@@ -54,7 +54,7 @@ class CompaniesController: UITableViewController {
                 
                 companies.forEach({ (company) in
                     print(company.name ?? "")
-                    company.name = "A: \(company.name ?? "")"
+                    company.name = "C: \(company.name ?? "")"
                 })
                 
                 do {
@@ -62,7 +62,17 @@ class CompaniesController: UITableViewController {
                     
                     //lets update the UI after a save
                     DispatchQueue.main.async {
+                        
+                        // reset will forget all of teh object you've fetch before
+                        
+                        CoreDataManager.shared.persistentContainer.viewContext.reset()
+                        
+                        // you don't want to refetch everything if you're just simply update one or two companies
+                        
                         self.companies = CoreDataManager.shared.fetchCompanies()
+                        
+                        //is there a way to just merge the changes that you made onto the main view context
+                        
                         self.tableView.reloadData()
                     }
                     
@@ -82,10 +92,9 @@ class CompaniesController: UITableViewController {
         
         self.companies = CoreDataManager.shared.fetchCompanies()
         
-        
         navigationItem.leftBarButtonItems = [
          UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-         UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdates))]
+         UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdate))]
         
         view.backgroundColor = .white
         
@@ -143,11 +152,3 @@ class CompaniesController: UITableViewController {
     }
     
 }
-
-
-
-
-
-
-
-
