@@ -42,6 +42,40 @@ class CompaniesController: UITableViewController {
 
         }
     }
+    
+    @objc private func doUpdate() {
+        print("Trying to update companies on a background context")
+        
+        CoreDataManager.shared.persistentContainer.performBackgroundTask { (backgroundContext) in
+            
+            let request: NSFetchRequest = Company.fetchRequest()
+            do {
+                let companies = try backgroundContext.fetch(request)
+                
+                companies.forEach({ (company) in
+                    print(company.name ?? "")
+                    company.name = "A: \(company.name ?? "")"
+                })
+                
+                do {
+                    try backgroundContext.save()
+                    
+                    //lets update the UI after a save
+                    DispatchQueue.main.async {
+                        self.companies = CoreDataManager.shared.fetchCompanies()
+                        self.tableView.reloadData()
+                    }
+                    
+                } catch let saveErr {
+                    print("Failed to save on background:", saveErr)
+                }
+            } catch let err {
+                print("Failed to fetch company in the background: ", err)
+            }
+            
+            
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +85,7 @@ class CompaniesController: UITableViewController {
         
         navigationItem.leftBarButtonItems = [
          UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-         UIBarButtonItem(title: "Do Work", style: .plain, target: self, action: #selector(doWork))]
+         UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdates))]
         
         view.backgroundColor = .white
         
