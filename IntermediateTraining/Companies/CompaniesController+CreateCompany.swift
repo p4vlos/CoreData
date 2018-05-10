@@ -2,7 +2,7 @@
 //  CompaniesController+CreateCompany.swift
 //  IntermediateTraining
 //
-//  Created by Brian Voong on 10/27/17.
+//  Created by Pavlos Nicolaou on 06/05/2018.
 //  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 

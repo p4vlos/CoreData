@@ -2,7 +2,7 @@
 //  ViewController.swift
 //  IntermediateTraining
 //
-//  Created by Brian Voong on 10/21/17.
+//  Created by Pavlos Nicolaou on 06/05/2018.
 //  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
@@ -125,7 +125,6 @@ class CompaniesController: UITableViewController {
                         } catch let finalSaveErr {
                             print("Failed to save main context: ", finalSaveErr)
                         }
-                        
                     }
         
                 } catch let saveErr {
@@ -135,7 +134,6 @@ class CompaniesController: UITableViewController {
             } catch let fetchErr {
                 print("Failed to fetch on private context: ", fetchErr)
             }
-            
         }
     }
 

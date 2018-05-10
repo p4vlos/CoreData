@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  IntermediateTraining
 //
-//  Created by Brian Voong on 10/21/17.
+//  Created by Pavlos Nicolaou on 06/05/2018.
 //  Copyright © 2017 Lets Build That App. All rights reserved.
 //
 
@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow()
         window?.makeKeyAndVisible()
         
-        let companiesController = CompaniesController()
+        let companiesController = CompaniesAutoUpdateController()
 //        dummyViewController.view.backgroundColor = .blue
         let navController = CustomNavigationController(rootViewController: companiesController)
         window?.rootViewController = navController

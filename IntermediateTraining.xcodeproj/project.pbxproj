@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E940BAC209F8FCF0043471D /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E940BAB209F8FCF0043471D /* EmployeeType.swift */; };
+		3EBC120C20A44C0300DE286F /* CompaniesAutoUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */; };
 		C720C0B31F9BE1B3006195A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C720C0B21F9BE1B3006195A0 /* AppDelegate.swift */; };
 		C720C0B51F9BE1B3006195A0 /* CompaniesController.swift in Sources */ = {isa = PBXBuildFile; fileRef = C720C0B41F9BE1B3006195A0 /* CompaniesController.swift */; };
 		C720C0B81F9BE1B3006195A0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C720C0B61F9BE1B3006195A0 /* Main.storyboard */; };
@@ -28,6 +29,7 @@
 
 /* Begin PBXFileReference section */
 		3E940BAB209F8FCF0043471D /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
+		3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
 		C720C0AF1F9BE1B3006195A0 /* IntermediateTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntermediateTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C720C0B21F9BE1B3006195A0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		C720C0B41F9BE1B3006195A0 /* CompaniesController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesController.swift; sourceTree = "<group>"; };
@@ -102,6 +104,7 @@
 				C72CADD41FA3CEEC006F2E12 /* CompaniesController+CreateCompany.swift */,
 				C72CADD61FA3CFAD006F2E12 /* CompaniesController+UITableView.swift */,
 				C7C3C0761F9E9DE8007DD439 /* CreateCompanyController.swift */,
+				3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */,
 			);
 			path = Companies;
 			sourceTree = "<group>";
@@ -207,6 +210,7 @@
 				C72CADF11FA529A1006F2E12 /* CreateEmployeeController.swift in Sources */,
 				C72CADE41FA522F1006F2E12 /* EmployeesController.swift in Sources */,
 				C720C0B31F9BE1B3006195A0 /* AppDelegate.swift in Sources */,
+				3EBC120C20A44C0300DE286F /* CompaniesAutoUpdateController.swift in Sources */,
 				C7F38BAB1FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodeld in Sources */,
 				C7F38BAF1FA0464500089DB4 /* CoreDataManager.swift in Sources */,
 				C74388ED1F9E999000EF9F46 /* Company.swift in Sources */,
