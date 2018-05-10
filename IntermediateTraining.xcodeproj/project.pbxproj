@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		3E67EF8120A47E3F00670240 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E67EF8020A47E3E00670240 /* Service.swift */; };
+		3E67EF8520A49F5200670240 /* Modelv1,1_2.xcmappingmodel in Sources */ = {isa = PBXBuildFile; fileRef = 3E67EF8420A49F5200670240 /* Modelv1,1_2.xcmappingmodel */; };
+		3E67EF8720A49FF100670240 /* CustomMigrationPolicy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E67EF8620A49FF100670240 /* CustomMigrationPolicy.swift */; };
 		3E940BAC209F8FCF0043471D /* EmployeeType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E940BAB209F8FCF0043471D /* EmployeeType.swift */; };
 		3EBC120C20A44C0300DE286F /* CompaniesAutoUpdateController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */; };
 		C720C0B31F9BE1B3006195A0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C720C0B21F9BE1B3006195A0 /* AppDelegate.swift */; };
@@ -31,6 +33,9 @@
 /* Begin PBXFileReference section */
 		3E67EF8020A47E3E00670240 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntermediateTrainingModels_v1.1.xcdatamodel; sourceTree = "<group>"; };
+		3E67EF8320A499CF00670240 /* IntermediateTrainingModels_v1.2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntermediateTrainingModels_v1.2.xcdatamodel; sourceTree = "<group>"; };
+		3E67EF8420A49F5200670240 /* Modelv1,1_2.xcmappingmodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcmappingmodel; path = "Modelv1,1_2.xcmappingmodel"; sourceTree = "<group>"; };
+		3E67EF8620A49FF100670240 /* CustomMigrationPolicy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomMigrationPolicy.swift; sourceTree = "<group>"; };
 		3E940BAB209F8FCF0043471D /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 		3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
 		C720C0AF1F9BE1B3006195A0 /* IntermediateTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntermediateTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +99,8 @@
 				C74388EC1F9E999000EF9F46 /* Company.swift */,
 				C7F38BA91FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodeld */,
 				C7F38BAE1FA0464500089DB4 /* CoreDataManager.swift */,
+				3E67EF8420A49F5200670240 /* Modelv1,1_2.xcmappingmodel */,
+				3E67EF8620A49FF100670240 /* CustomMigrationPolicy.swift */,
 			);
 			path = IntermediateTraining;
 			sourceTree = "<group>";
@@ -204,6 +211,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C72CADD51FA3CEEC006F2E12 /* CompaniesController+CreateCompany.swift in Sources */,
+				3E67EF8520A49F5200670240 /* Modelv1,1_2.xcmappingmodel in Sources */,
 				C78EE8BE1F9C45A400446BDD /* UIColor+theme.swift in Sources */,
 				C720C0B51F9BE1B3006195A0 /* CompaniesController.swift in Sources */,
 				C7C3C0771F9E9DE8007DD439 /* CreateCompanyController.swift in Sources */,
@@ -219,6 +227,7 @@
 				C7F38BAB1FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodeld in Sources */,
 				C7F38BAF1FA0464500089DB4 /* CoreDataManager.swift in Sources */,
 				C74388ED1F9E999000EF9F46 /* Company.swift in Sources */,
+				3E67EF8720A49FF100670240 /* CustomMigrationPolicy.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -412,10 +421,11 @@
 		C7F38BA91FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3E67EF8320A499CF00670240 /* IntermediateTrainingModels_v1.2.xcdatamodel */,
 				3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */,
 				C7F38BAA1FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodel */,
 			);
-			currentVersion = 3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */;
+			currentVersion = 3E67EF8320A499CF00670240 /* IntermediateTrainingModels_v1.2.xcdatamodel */;
 			path = IntermediateTrainingModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
