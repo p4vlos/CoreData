@@ -43,7 +43,7 @@ class CompaniesController: UITableViewController {
         }
     }
     
-    @objc private func doUpdate() {
+    @objc private func doUpdates() {
         print("Trying to update companies on a background context")
         
         CoreDataManager.shared.persistentContainer.performBackgroundTask { (backgroundContext) in
@@ -64,15 +64,12 @@ class CompaniesController: UITableViewController {
                     DispatchQueue.main.async {
                         
                         // reset will forget all of teh object you've fetch before
-                        
                         CoreDataManager.shared.persistentContainer.viewContext.reset()
                         
                         // you don't want to refetch everything if you're just simply update one or two companies
-                        
                         self.companies = CoreDataManager.shared.fetchCompanies()
                         
                         //is there a way to just merge the changes that you made onto the main view context
-                        
                         self.tableView.reloadData()
                     }
                     
@@ -82,7 +79,62 @@ class CompaniesController: UITableViewController {
             } catch let err {
                 print("Failed to fetch company in the background: ", err)
             }
+        }
+    }
+    
+    @objc private func doNestedUpdates() {
+        DispatchQueue.global(qos: .background).async {
+            //we'll try to perform our udpates
             
+            //we'll first construct a custom MOC
+            
+            let privateContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
+            
+            privateContext.parent = CoreDataManager.shared.persistentContainer.viewContext
+            
+            //execute updates on privateContext new
+            
+            let request: NSFetchRequest<Company> = Company.fetchRequest()
+            
+            request.fetchLimit = 1
+            
+            do {
+                let companies = try privateContext.fetch(request)
+                
+                companies.forEach({ (company) in
+                    print(company.name ?? "")
+                    company.name = "D: \(company.name ?? "")"
+                })
+                
+                do {
+                    try privateContext.save()
+                    
+                    //after save succeeds
+                    
+                    DispatchQueue.main.async {
+                        
+                        do {
+                            
+                            let context = CoreDataManager.shared.persistentContainer.viewContext
+                            if context.hasChanges {
+                                try context.save()
+                            }
+                            
+                            self.tableView.reloadData()
+                            
+                        } catch let finalSaveErr {
+                            print("Failed to save main context: ", finalSaveErr)
+                        }
+                        
+                    }
+        
+                } catch let saveErr {
+                    print("Failed to save on private context: ", saveErr)
+                }
+                
+            } catch let fetchErr {
+                print("Failed to fetch on private context: ", fetchErr)
+            }
             
         }
     }
@@ -94,7 +146,7 @@ class CompaniesController: UITableViewController {
         
         navigationItem.leftBarButtonItems = [
          UIBarButtonItem(title: "Reset", style: .plain, target: self, action: #selector(handleReset)),
-         UIBarButtonItem(title: "Do Updates", style: .plain, target: self, action: #selector(doUpdate))]
+         UIBarButtonItem(title: "Nested Updates", style: .plain, target: self, action: #selector(doNestedUpdates))]
         
         view.backgroundColor = .white
         
