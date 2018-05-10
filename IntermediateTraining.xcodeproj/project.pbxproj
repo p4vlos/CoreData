@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		3E67EF8020A47E3E00670240 /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = IntermediateTrainingModels_v1.1.xcdatamodel; sourceTree = "<group>"; };
 		3E940BAB209F8FCF0043471D /* EmployeeType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmployeeType.swift; sourceTree = "<group>"; };
 		3EBC120B20A44C0300DE286F /* CompaniesAutoUpdateController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CompaniesAutoUpdateController.swift; sourceTree = "<group>"; };
 		C720C0AF1F9BE1B3006195A0 /* IntermediateTraining.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = IntermediateTraining.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -411,9 +412,10 @@
 		C7F38BA91FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */,
 				C7F38BAA1FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodel */,
 			);
-			currentVersion = C7F38BAA1FA00BCD00089DB4 /* IntermediateTrainingModels.xcdatamodel */;
+			currentVersion = 3E67EF8220A4955700670240 /* IntermediateTrainingModels_v1.1.xcdatamodel */;
 			path = IntermediateTrainingModels.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
